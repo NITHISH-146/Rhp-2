@@ -1,0 +1,34 @@
+class Solution:
+    def trap(self, height: list[int]) -> int:
+        size = len(height)
+
+        if size == 0:
+            return 0
+
+        start = 0
+        end = size - 1
+
+        highest_left = height[start]
+        highest_right = height[end]
+
+        total_water = 0
+
+        while start < end:
+
+            if highest_left <= highest_right:
+                start += 1
+
+                if height[start] > highest_left:
+                    highest_left = height[start]
+                else:
+                    total_water += highest_left - height[start]
+
+            else:
+                end -= 1
+
+                if height[end] > highest_right:
+                    highest_right = height[end]
+                else:
+                    total_water += highest_right - height[end]
+
+        return total_water
