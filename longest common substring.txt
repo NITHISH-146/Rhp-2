@@ -1,0 +1,45 @@
+import java.util.Scanner;
+
+public class Main {
+
+    static int longestCommonSubstring(String strA, String strB) {
+
+        int lenA = strA.length();
+        int lenB = strB.length();
+
+        int[][] memo = new int[lenA + 1][lenB + 1];
+        int answer = 0;
+
+        for (int row = 1; row <= lenA; row++) {
+            for (int col = 1; col <= lenB; col++) {
+
+                char a = strA.charAt(row - 1);
+                char b = strB.charAt(col - 1);
+
+                if (a == b) {
+                    memo[row][col] = memo[row - 1][col - 1] + 1;
+
+                    if (memo[row][col] > answer) {
+                        answer = memo[row][col];
+                    }
+                }
+            }
+        }
+
+        return answer;
+    }
+
+    public static void main(String[] args) {
+
+        Scanner input = new Scanner(System.in);
+
+        String first = input.next();
+        String second = input.next();
+
+        int result = longestCommonSubstring(first, second);
+
+        System.out.println("Length = " + result);
+
+        input.close();
+    }
+}

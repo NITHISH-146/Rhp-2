@@ -1,0 +1,42 @@
+import java.util.Scanner;
+
+public class Main {
+
+    static int findLCS(String first, String second) {
+
+        int rows = first.length();
+        int cols = second.length();
+
+        int[][] table = new int[rows + 1][cols + 1];
+
+        for (int r = 1; r <= rows; r++) {
+            for (int c = 1; c <= cols; c++) {
+
+                char ch1 = first.charAt(r - 1);
+                char ch2 = second.charAt(c - 1);
+
+                if (ch1 == ch2) {
+                    table[r][c] = table[r - 1][c - 1] + 1;
+                } else {
+                    table[r][c] = Math.max(table[r - 1][c], table[r][c - 1]);
+                }
+            }
+        }
+
+        return table[rows][cols];
+    }
+
+    public static void main(String[] args) {
+
+        Scanner input = new Scanner(System.in);
+
+        String firstString = input.next();
+        String secondString = input.next();
+
+        int result = findLCS(firstString, secondString);
+
+        System.out.println("Length of LCS = " + result);
+
+        input.close();
+    }
+}
