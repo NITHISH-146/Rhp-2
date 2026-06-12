@@ -1,0 +1,44 @@
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) {
+
+        Scanner input = new Scanner(System.in);
+
+        int boys = input.nextInt();
+        int apartments = input.nextInt();
+
+        int[] required = new int[boys];
+        int[] available = new int[apartments];
+
+        for (int i = 0; i < boys; i++) {
+            required[i] = input.nextInt();
+        }
+
+        for (int i = 0; i < apartments; i++) {
+            available[i] = input.nextInt();
+        }
+
+        Arrays.sort(required);
+        Arrays.sort(available);
+
+        int i = boys - 1;
+        int j = apartments - 1;
+        int matches = 0;
+
+        while (i >= 0 && j >= 0) {
+
+            if (available[j] <= 2 * required[i]) {
+                matches++;
+                i--;
+                j--;
+            } else {
+                j--;
+            }
+        }
+
+        System.out.println(matches);
+
+        input.close();
+    }
+}
